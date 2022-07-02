@@ -12,23 +12,10 @@ export class AppController {
   constructor(
     private readonly appService: AppService,
     private readonly authService: AuthService) {}
-
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
   
   @UseGuards(LocalAuthGuard)
   @Post('login')
   login(@Req() req: { user: User }, @Res({ passthrough: true }) response: Response) {
     return this.authService.login(response, req.user);
-  }
-
-  @Get('test')
-  @UseGuards(AccessJwtAuthGuard)
-  @UseFilters(ViewAuthFilterHelper())
-  geez()
-  {
-    return 'geez'
   }
 }

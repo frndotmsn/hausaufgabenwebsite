@@ -7,6 +7,7 @@ import { TasksModule } from './tasks/tasks.graphql.module';
 import { UsersGQLModule } from './users/gql/users.module';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
+import { ClientModule } from './client/client.module';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { AuthModule } from './auth/auth.module';
     }),
     UsersGQLModule,
     TasksModule,
-    AuthModule
+    AuthModule,
+    ClientModule
   ],
   controllers: [AppController],
   providers: [AppService],
