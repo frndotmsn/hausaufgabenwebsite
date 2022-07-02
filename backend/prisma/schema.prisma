@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int       @id @default(autoincrement())
+  email           String    @unique
+  hashedPassword  String
+  shouldReauth    Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  lastLogin       DateTime  @default(now())
+  name            String    @unique @db.VarChar(48)
+  banned          Boolean   @default(false)
+  bannedBy        User?     @relation(name: "banner", fields: [bannedById], references: [id])
+  bannedById      Int?
+  bannedUsers     User[]    @relation(name: "banner")
+  createdTasks    Task[]    @relation(name: "creator")
+  updatedTasks    Task[]    @relation(name: "updater")
+  verifiedTasks   Task[]    @relation(name: "verifier")
+  role            Role      @default(USER)
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  USER
+}
+
+model Task {
+  id            Int       @id @default(autoincrement())
+  issuedAt      DateTime
+  dueTo         DateTime
+  subject       String    @db.VarChar(32)
+  title         String
+  
+  verified      Boolean
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime?
+  
+  verifier      User?     @relation(name: "verifier", fields: [verifierId], references: [id])
+  creator       User      @relation(name: "creator", fields: [creatorId], references: [id])
+  updater       User?     @relation(name: "updater", fields: [updaterId], references: [id])
+  
+  verifierId    Int?
+  creatorId     Int
+  updaterId     Int?
+}
