@@ -35,10 +35,9 @@ button {
 #root > div:first-child {
     row-gap: 2px;
     background-color: black;
-}
-
-#root > div > * {
-    background-color: white;
+    * {
+        background-color: white;
+    }
 }
 
 #toggle-button {
