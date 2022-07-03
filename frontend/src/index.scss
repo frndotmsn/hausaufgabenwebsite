@@ -13,19 +13,29 @@ span {
     @include text();
 }
 
-button {
-    @include text();
-    cursor: pointer;
+@mixin transition {
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-out;
+}
+
+@mixin opacityOnHover {
     &:hover {
-        transition: opacity 0.25s ease-in-out;
         opacity: 0.7;
     }
+}
+
+button {
+    @include text();
+    @include opacityOnHover();
+    @include transition();
+    transition-property: opacity;
+    cursor: pointer;
 }
 
 #root > div:first-child {
     grid-template-rows: min-content 1fr;
     row-gap: 2px;
-    background-color: green;
+    background-color: black;
 }
 
 #root > div > * {
@@ -33,10 +43,16 @@ button {
 }
 
 #toggle-button {
+    transition-property: transform, opacity;
     img {
         height: 3.125vh;
     }
     &.toggled {
         transform: rotate(180deg);    
     }
+}
+
+#root > ul {
+    @include transition();
+    transition-property: top;
 }
