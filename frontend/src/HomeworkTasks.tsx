@@ -28,8 +28,8 @@ const HomeworkTasks: Component<HomeworkTasksProps> = (props) => {
     const taskGroups = createMemo(() => groupBy(todaysTasks(), (task: Task) => toNoun(task.subject)))
 
     return (
-        <main class="p-2">
-            <div class="flex justify-between">
+        <main>
+            <div class="flex justify-between p-2">
                 <ConditionalTextButton
                     onclick={toggleTo}
                     condition={to()}
@@ -43,7 +43,7 @@ const HomeworkTasks: Component<HomeworkTasksProps> = (props) => {
             </div>
             <ul>
                 <For each={Array.from(taskGroups())}>{(pair: [string, Task[]]) =>
-                    <li><HomeworkSubject subject={pair[0]} tasks={pair[1]} /></li>
+                    <li class="px-2"><HomeworkSubject subject={pair[0]} tasks={pair[1]} /></li>
                 }</For>
             </ul>
         </main>
