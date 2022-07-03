@@ -41,7 +41,7 @@ const HomeworkTasks: Component<HomeworkTasksProps> = (props) => {
                     a={'Nur Verifiziert'}
                     b={'Alle'} />
             </div>
-            <ul>
+            <ul class="nth-child:bg-gray-200">
                 <For each={Array.from(taskGroups())}>{(pair: [string, Task[]]) =>
                     <li class="px-2"><HomeworkSubject subject={pair[0]} tasks={pair[1]} /></li>
                 }</For>

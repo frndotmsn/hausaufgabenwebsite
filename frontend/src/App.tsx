@@ -8,7 +8,10 @@ const App: Component = () => {
   const [dates, setDates] = createSignal([ new Date() ]);
   const [currentDate, setCurrentDate] = createSignal(new Date(2032, 1, 5));
 
-  const [tasks, setTasks] = createSignal<Task[]>([ { verified: false, id: 1, issuedAt: new Date(2022, 1, 25), dueTo: new Date(), subject: 'Latein', title: 'S.99 Nr 1+3', createdAt: new Date(), creatorId: 1 } ])
+  const [tasks, setTasks] = createSignal<Task[]>([
+    { verified: false, id: 1, issuedAt: new Date(2022, 1, 25), dueTo: new Date(), subject: 'Latein', title: 'S.99 Nr 1+3', createdAt: new Date(), creatorId: 1 },
+    { verified: true, id: 2, issuedAt: new Date(2022, 1, 25), dueTo: new Date(), subject: 'Mathe', title: 'S.99 Nr 1+3', createdAt: new Date(), creatorId: 1 }
+  ])
 
   return (
     <>
