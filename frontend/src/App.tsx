@@ -1,6 +1,6 @@
 import { Component, createSignal } from 'solid-js';
-import { localeDateStringOptions } from './constants';
 import Datebar from './Datebar';
+import HeaderComponent from './HeaderComponent';
 import HomeworkTasks from './HomeworkTasks';
 import { Task } from './models/Task';
 
@@ -16,11 +16,7 @@ const App: Component = () => {
   return (
     <>
       <div class="grid">
-        <div class="grid p-2">
-          <span class="justify-self-center">
-            {currentDate().toLocaleDateString(localeDateStringOptions.locale, localeDateStringOptions.options)}
-          </span>
-        </div>
+        <HeaderComponent currentDate={currentDate}/>
         <HomeworkTasks tasks={tasks()} currentDate={currentDate()} />
       </div>
       <Datebar dates={dates} setCurrentDate={setCurrentDate} />
