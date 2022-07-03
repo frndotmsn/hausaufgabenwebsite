@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$text-gray-400: rgb(55 65 81);
+
+@mixin text {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 4vh;
+}
+
+span {
+    @include text();
+}
+
+button {
+    @include text();
+    cursor: pointer;
+    &:hover {
+        transition: opacity 0.25s ease-in-out;
+        opacity: 0.7;
+    }
+}
+
+#root > div:first-child {
+    grid-template-rows: min-content 1fr;
+    row-gap: 2px;
+    background-color: green;
+}
+
+#root > div > * {
+    background-color: white;
+}
+
+#toggle-button {
+    img {
+        height: 3.125vh;
+    }
+    &.toggled {
+        transform: rotate(180deg);    
+    }
+}

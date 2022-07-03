@@ -1,0 +1,1 @@
+export const localeDateStringOptions: { locale: Intl.LocalesArgument, options: Intl.DateTimeFormatOptions } = { locale: 'de-DE', options: { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }};
