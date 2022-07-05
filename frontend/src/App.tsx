@@ -16,7 +16,8 @@ const App: Component = () => {
   return (
     <>
       <div class="grid">
-        <HeaderComponent currentDate={currentDate}/>
+        <HeaderComponent currentDate={currentDate()} setCurrentDate={setCurrentDate}/>
+        
         <HomeworkTasks tasks={tasks()} currentDate={currentDate()} />
       </div>
       <Datebar dates={dates} setCurrentDate={setCurrentDate} />
