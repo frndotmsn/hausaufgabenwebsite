@@ -7,10 +7,10 @@ interface HeaderComponentProps {
 
 const HeaderComponent: Component<HeaderComponentProps> = (props) => {
     return (
-        <header class="grid p-2">
-          <button class="justify-self-center">
-            {props.currentDate().toLocaleDateString(localeDateStringOptions.locale, localeDateStringOptions.options)}
-          </button>
+        <header class="grid p-2 md:p-3 lg:p-4">
+            <button class="justify-self-center">
+                {props.currentDate().toLocaleDateString(localeDateStringOptions.locale, localeDateStringOptions.options)}
+            </button>
         </header>
     );
 };

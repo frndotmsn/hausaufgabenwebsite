@@ -29,7 +29,7 @@ const HomeworkTasks: Component<HomeworkTasksProps> = (props) => {
 
     return (
         <main>
-            <div class="flex justify-between p-2">
+            <div class="flex justify-between py-2 px-2 md:px-3 lg:px-10">
                 <ConditionalTextButton
                     onclick={toggleTo}
                     condition={to()}
@@ -43,7 +43,7 @@ const HomeworkTasks: Component<HomeworkTasksProps> = (props) => {
             </div>
             <ul class="nth-child:bg-gray-200">
                 <For each={Array.from(taskGroups())}>{(pair: [string, Task[]]) =>
-                    <li class="px-2"><HomeworkSubject subject={pair[0]} tasks={pair[1]} /></li>
+                    <li class="px-2 md:px-3 lg:px-10"><HomeworkSubject subject={pair[0]} tasks={pair[1]} /></li>
                 }</For>
             </ul>
         </main>
