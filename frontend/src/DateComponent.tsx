@@ -5,6 +5,7 @@ interface DateComponentProps {
     setCurrentDate: Setter<Date>;
     toggleOnVisible: () => void;
     date: Date;
+    options?: Intl.DateTimeFormatOptions;
 }
 
 const DateComponent: Component<DateComponentProps> = (props) => {
@@ -16,7 +17,7 @@ const DateComponent: Component<DateComponentProps> = (props) => {
     
     return (
         <button type="button" onclick={handleOnClick} data-date={props.date.toISOString()}>
-            {props.date.toLocaleDateString(localeDateStringOptions.locale, localeDateStringOptions.options)}
+            {props.date.toLocaleDateString(localeDateStringOptions.locale, props.options || localeDateStringOptions.options)}
         </button>
     )
 }
