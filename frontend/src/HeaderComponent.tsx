@@ -35,7 +35,7 @@ const HeaderComponent: Component<HeaderComponentProps> = (props) => {
                 </button>
             </header>
             <Show when={weekdaySelectionVisible()}>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 justify-items-center">
                     <For each={weekdays()}>{ (date: Date) =>
                         <div class="w-min">
                             <DateComponent options={options} date={date} setCurrentDate={props.setCurrentDate} toggleOnVisible={toggleWeekdaySelectionVisible}/>
