@@ -30,7 +30,7 @@ const HeaderComponent: Component<HeaderComponentProps> = (props) => {
     return (
         <>
             <header class="grid p-2 md:p-3 lg:p-4">
-                <button class="justify-self-center">
+                <button class="justify-self-center" onclick={toggleWeekdaySelectionVisible}>
                     {props.currentDate.toLocaleDateString(localeDateStringOptions.locale, localeDateStringOptions.options)}
                 </button>
             </header>
