@@ -9,7 +9,7 @@ export class UsersGQLResolver {
     constructor(private readonly usersService: UsersService) {}
     
     @Query(() => User, { nullable: true, name: 'user' })
-    async getUser(@Args('id', { type: () => Int }) id: number): Promise<User | null> {
+    async getUser(@Args('id', { type: () => String }) id: string): Promise<User | null> {
         return await this.usersService.getUser(id);
     }
 
@@ -24,12 +24,12 @@ export class UsersGQLResolver {
     }
 
     @Mutation(() => User)
-    async updateUser(@Args('id', { type: () => Int }) id: number, @Args('updateUserData') userUpdateData: UserUpdateInput): Promise<User> {
+    async updateUser(@Args('id', { type: () => String }) id: string, @Args('updateUserData') userUpdateData: UserUpdateInput): Promise<User> {
         return await this.usersService.updateUser(id, userUpdateData);
     }
 
     @Mutation(() => User)
-    async deleteUser(@Args('id', { type: () => Int }) id: number): Promise<User> {
+    async deleteUser(@Args('id', { type: () => String }) id: string): Promise<User> {
         return await this.usersService.deleteUser(id);
     }
 }

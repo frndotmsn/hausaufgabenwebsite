@@ -1,11 +1,11 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { IsBoolean, IsDate, IsInt, IsNotEmpty, IsOptional, MaxLength } from 'class-validator';
+import { Field, ObjectType } from '@nestjs/graphql';
+import { IsBoolean, IsDate, IsNotEmpty, IsOptional, MaxLength } from 'class-validator';
 
 @ObjectType()
 export class Task {
-    @Field(() => Int)
-    @IsInt()
-    id: number;
+    @Field(() => String)
+    @IsNotEmpty()
+    id: string;
     @Field()
     @IsDate()
     issuedAt: Date;
@@ -29,15 +29,15 @@ export class Task {
     @IsOptional()
     @IsDate()
     updatedAt?: Date;
-    @Field({ nullable: true })
+    @Field(() => String, { nullable: true })
     @IsOptional()
-    @IsInt()
-    verifierId?: number;
-    @Field()
-    @IsInt()
-    creatorId: number;
-    @Field({ nullable: true })
+    @IsNotEmpty()
+    verifierId?: string;
+    @Field(() => String)
+    @IsNotEmpty()
+    creatorId: string;
+    @Field(() => String, { nullable: true })
     @IsOptional()
-    @IsInt()
-    updaterId?: number;
+    @IsNotEmpty()
+    updaterId?: string;
 }

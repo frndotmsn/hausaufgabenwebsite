@@ -11,7 +11,7 @@ datasource db {
 }
 
 model User {
-  id              Int       @id @default(autoincrement())
+  id              String    @id @default(cuid())
   email           String    @unique
   hashedPassword  String
   shouldReauth    Boolean   @default(false)
@@ -20,7 +20,7 @@ model User {
   name            String    @unique @db.VarChar(48)
   banned          Boolean   @default(false)
   bannedBy        User?     @relation(name: "banner", fields: [bannedById], references: [id])
-  bannedById      Int?
+  bannedById      String?
   bannedUsers     User[]    @relation(name: "banner")
   createdTasks    Task[]    @relation(name: "creator")
   updatedTasks    Task[]    @relation(name: "updater")
@@ -35,7 +35,7 @@ enum Role {
 }
 
 model Task {
-  id            Int       @id @default(autoincrement())
+  id            String       @id @default(cuid())
   issuedAt      DateTime
   dueTo         DateTime
   subject       String    @db.VarChar(32)
@@ -49,7 +49,7 @@ model Task {
   creator       User      @relation(name: "creator", fields: [creatorId], references: [id])
   updater       User?     @relation(name: "updater", fields: [updaterId], references: [id])
   
-  verifierId    Int?
-  creatorId     Int
-  updaterId     Int?
+  verifierId    String?
+  creatorId     String
+  updaterId     String?
 }

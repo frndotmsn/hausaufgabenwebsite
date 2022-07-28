@@ -6,7 +6,7 @@ import { TaskUpdateInput } from './dto/input/task-update.input';
 
 @Injectable()
 export class TasksService {
-    public async getTask(id: number): Promise<Task | null> {
+    public async getTask(id: string): Promise<Task | null> {
         return await prisma.task.findFirst({ where: { id } });
     }
     
@@ -17,12 +17,12 @@ export class TasksService {
     // TODO: check if creator isn't banned
     // TODO: verified & creator based on logged in user
     public async createTask(taskCreateData: TaskCreateInput): Promise<Task> {
-        const data = { ...taskCreateData, verified: false, creator: { connect: { id: 1 } } }
+        const data = { ...taskCreateData, verified: false, creator: { connect: { id: "1" } } }
         return await prisma.task.create({ data });
     }
 
     // TODO: verifier & updater based on logged in user
-    public async updateTask(id: number, taskUpdateData: TaskUpdateInput): Promise<Task> {
+    public async updateTask(id: string, taskUpdateData: TaskUpdateInput): Promise<Task> {
         const data = {
             ...taskUpdateData,
             updatedAt: new Date(Date.now()),
@@ -40,7 +40,7 @@ export class TasksService {
     }
 
     // TODO: check whether current user has permission to perform the deletion
-    public async deleteTask(id: number): Promise<Task> {
+    public async deleteTask(id: string): Promise<Task> {
         return await prisma.task.delete({ where: { id } });
     }
 }

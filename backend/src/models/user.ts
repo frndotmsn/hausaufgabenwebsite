@@ -1,12 +1,12 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql'
-import { IsBoolean, IsDate, IsEmail, IsIn, IsInt, IsNotEmpty, IsOptional } from 'class-validator';
+import { Field, ObjectType } from '@nestjs/graphql'
+import { IsBoolean, IsDate, IsEmail, IsIn, IsNotEmpty, IsOptional } from 'class-validator';
 import { Role } from './role';
 
 @ObjectType()
 export class User {
-    @Field(() => Int)
-    @IsInt()
-    id: number;
+    @Field(() => String)
+    @IsNotEmpty()
+    id: string;
     @IsEmail()
     email: string;
     @IsNotEmpty()
@@ -24,8 +24,8 @@ export class User {
     @IsBoolean()
     banned: boolean;
     @IsOptional()
-    @IsInt()
-    bannedById?: number;
+    @IsNotEmpty()
+    bannedById?: string;
     @Field(() => String)
     @IsIn([ 'OWNER', 'ADMIN', 'USER' ])
     role: Role
