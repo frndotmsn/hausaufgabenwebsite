@@ -11,7 +11,7 @@ export class UsersService {
         return await prisma.user.findFirst({ where: { name } });
     }
 
-    public async getUser(id: number): Promise<User | null> {
+    public async getUser(id: string): Promise<User | null> {
         return await prisma.user.findFirst({ where: { id } });
     }
     
@@ -29,7 +29,7 @@ export class UsersService {
         return await prisma.user.create({ data: user});
     }
     // TODO: Add authentication with check for admin bc of banning
-    public async updateUser(id: number, userUpdateData: UserUpdateInput): Promise<User> {
+    public async updateUser(id: string, userUpdateData: UserUpdateInput): Promise<User> {
         const hashedPassword: string | undefined = userUpdateData.password ? await bcrypt.hash(userUpdateData.password, 10) : undefined
         delete userUpdateData.password;
         return await prisma.user.update({
@@ -38,7 +38,7 @@ export class UsersService {
         });
     }
 
-    public async deleteUser(id: number): Promise<User> {
+    public async deleteUser(id: string): Promise<User> {
         return await prisma.user.delete({ where: { id } });
     }
 

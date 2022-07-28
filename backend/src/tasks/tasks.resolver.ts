@@ -9,7 +9,7 @@ export class TasksResolver {
     constructor(private readonly tasksService: TasksService) {}
 
     @Query(() => Task, { nullable: true, name: 'task' })
-    async getTask(@Args('id', { type: () => Int }) id: number): Promise<Task | null> {
+    async getTask(@Args('id', { type: () => String }) id: string): Promise<Task | null> {
         return await this.tasksService.getTask(id);
     }
 
@@ -24,12 +24,12 @@ export class TasksResolver {
     }
 
     @Mutation(() => Task)
-    async updateTask(@Args('id', { type: () => Int }) id: number, @Args('updateTaskData') updateTaskData: TaskUpdateInput): Promise<Task> {
+    async updateTask(@Args('id', { type: () => String }) id: string, @Args('updateTaskData') updateTaskData: TaskUpdateInput): Promise<Task> {
         return await this.tasksService.updateTask(id, updateTaskData);
     }
 
     @Mutation(() => Task)
-    async deleteTask(@Args('id', { type: () => Int }) id: number): Promise<Task> {
+    async deleteTask(@Args('id', { type: () => String }) id: string): Promise<Task> {
         return await this.tasksService.deleteTask(id);
     }
 }

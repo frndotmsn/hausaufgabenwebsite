@@ -22,7 +22,7 @@ export class AccessJwtStrategy extends PassportStrategy(Strategy, 'access-jwt') 
         });
     }
 
-    async validate(payload: { id: number } | null): Promise<User | null> {
+    async validate(payload: { id: string } | null): Promise<User | null> {
         if (!payload) throw new UnauthorizedException()
         return await this.usersService.getUser(payload.id);
     }
