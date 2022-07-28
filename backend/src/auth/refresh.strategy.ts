@@ -28,7 +28,7 @@ export class RefreshStrategy extends PassportStrategy(Strategy, 'refresh-jwt') {
         const [scheme, refreshToken] = parts
         if (!/^Bearer$/i.test(scheme)) throw new UnauthorizedException('credentials_bad_scheme', 'Format is Authorization: Bearer [token]')
         const [{ iat: _0, exp: _1, ...accessPayload}, { iat: _2, exp: _3, payloadHash, ..._4}]
-        : [{ iat: number, exp: number, id: number }, { iat: number, exp: number, payloadHash: string }]
+        : [{ iat: number, exp: number, id: string }, { iat: number, exp: number, payloadHash: string }]
         = await Promise.all([this.accessJwtService.verifyAsync(accessToken, { ignoreExpiration: true }), this.refreshJwtService.verifyAsync(refreshToken)]);
         if (!await bcrypt.compare(JSON.stringify(accessPayload), payloadHash)) throw new UnauthorizedException('credentials_unmatching_tokens', "The access and refresh tokens don't match")
         const user = await this.usersService.getUser(accessPayload.id)
