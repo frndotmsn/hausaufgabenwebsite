@@ -1,7 +1,7 @@
 import { User } from "./user";
 
 export class Task {
-    id: number;
+    id: string;
     issuedAt: Date;
     dueTo: Date;
     subject: string;
