@@ -32,10 +32,6 @@ const App: Component = () => {
   const [currentDate, setCurrentDate] = createSignal(new Date(2032, 1, 5));
   const [to, setTo] = createSignal(true);
   const [verified, setVerified] = createSignal(true);
-  //const [tasks, setTasks] = createSignal<Task[]>([
-  //  { verified: false, id: 'test', issuedAt: new Date(2022, 1, 25), dueTo: new Date(), subject: 'Latein', title: 'S.99 Nr 1+3', createdAt: new Date(), creatorId: 1 },
-  //  { verified: true, id: 'test', issuedAt: new Date(2022, 1, 25), dueTo: new Date(), subject: 'Mathe', title: 'S.99 Nr 1+3', createdAt: new Date(), creatorId: 1 }
-  //])
 
   const [tasks, { mutate, refetch }] = OwnQuery<Task[]>(TaskQuery, [], { variables: { date: currentDate, toOrFrom: to, verified: verified } });
 
