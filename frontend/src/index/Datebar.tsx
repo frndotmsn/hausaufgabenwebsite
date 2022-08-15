@@ -1,12 +1,28 @@
-import { Accessor, Component, createSignal, For, Setter } from "solid-js";
+import { OperationVariables, QueryOptions } from '@apollo/client';
+import { gql } from '@merged/solid-apollo'
+import { Accessor, Component, createMemo, createResource, createSignal, For, Setter, Suspense } from "solid-js";
+import { client } from ".";
+import { rawArray } from '../helpers/proxies';
 import DateComponent from "./DateComponent";
 
 interface DatebarProps {
-    dates: Accessor<Date[]>,
+    currentDate: Date,
     setCurrentDate: Setter<Date>
 }
 
+const DateQuery = gql`
+query DateQuery {
+  dates
+}`;
+
 const Datebar: Component<DatebarProps> = (props) => {
+    const [dates] = createResource<Date[], QueryOptions<OperationVariables, Date[]>>(
+        async () => {const x = (
+          await client.query<Date[], OperationVariables>({ query: DateQuery })
+        ).data; console.log(x); return x;},
+        { initialValue: [], }
+    );
+
     const [visible, setVisible] = createSignal(false);
     
     const toggleOnVisible = () => setVisible(c => !c);
@@ -18,11 +34,13 @@ const Datebar: Component<DatebarProps> = (props) => {
                     <img src="/src/svg/arrow.svg" alt="Toggle"/>    
                 </button>
             </div>
-            <ul class={`fixed bg-white ${visible() ? 'top-0' : 'top-full'} min-h-screen w-screen z-10 p-2 md:p-3 lg:p-4`}>
-                <For each={props.dates()}>{(date: Date) => 
-                    <li><DateComponent date={date} setCurrentDate={props.setCurrentDate} toggleOnVisible={toggleOnVisible} /></li>
-                }</For>
-            </ul>
+            <Suspense fallback={<h1>Dates are currently loading...</h1>}>
+                <ul class={`fixed bg-white ${visible() ? 'top-0' : 'top-full'} min-h-screen w-screen z-10 p-2 md:p-3 lg:p-4`}>
+                    <For each={rawArray(dates(), "dates").filter(v => (v as unknown as string) !== props.currentDate.toISOString()).map<Date>(x => new Date(x))}>{(date: Date) => 
+                        <li><DateComponent date={date} setCurrentDate={props.setCurrentDate} toggleOnVisible={toggleOnVisible} /></li>
+                    }</For>
+                </ul>
+            </Suspense>
         </>
     );
 };

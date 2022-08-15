@@ -14,6 +14,16 @@ export class TasksService {
         return await prisma.task.findMany({ where: { ...(toOrFrom ? { dueTo: date} : { issuedAt: date }), verified } });
     }
 
+    public async getDates(): Promise<Date[]> {
+        const set = new Set<Date>();
+        for (const i of (await prisma.task.findMany({ select: { issuedAt: true, dueTo: true } })))
+        {
+            set.add(i.issuedAt);
+            set.add(i.dueTo);
+        }
+        return Array.from(set);
+    }
+
     // TODO: check if creator isn't banned
     // TODO: verified & creator based on logged in user
     public async createTask(taskCreateData: TaskCreateInput): Promise<Task> {

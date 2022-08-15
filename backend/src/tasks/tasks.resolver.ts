@@ -18,6 +18,11 @@ export class TasksResolver {
         return await this.tasksService.getTasks(date, toOrFrom, verified);
     }
 
+    @Query(() => [Date], { name: 'dates' })
+    async getDates(): Promise<Date[]> {
+        return await this.tasksService.getDates();
+    }
+
     @Mutation(() => Task)
     async createTask(@Args('createTaskData') createTaskData: TaskCreateInput): Promise<Task> {
         return await this.tasksService.createTask(createTaskData);

@@ -4,11 +4,12 @@ import Datebar from './Datebar';
 import HeaderComponent from './HeaderComponent';
 import HomeworkTasks from './HomeworkTasks';
 import { Task } from '../models/Task';
-import { gql, createQuery, useApollo } from '@merged/solid-apollo'
-import { OperationVariables, TypedDocumentNode, WatchQueryOptions } from '@apollo/client';
+import { gql } from '@merged/solid-apollo'
+import { OperationVariables, QueryOptions, TypedDocumentNode, WatchQueryOptions } from '@apollo/client';
 import { BaseOptions } from 'solid-js/types/reactive/signal';
 import { OwnQuery } from '../helpers/OwnQuery';
 import { rawArray } from '../helpers/proxies';
+import { client } from '.';
 
 
 const TaskQuery = gql`
@@ -28,7 +29,6 @@ query TaskQuery($date: DateTime!, $toOrFrom: Boolean!, $verified: Boolean!) {
 }`;
 
 const App: Component = () => {
-  const [dates, setDates] = createSignal([ new Date() ]);
   const [currentDate, setCurrentDate] = createSignal(new Date(2032, 1, 5));
   const [to, setTo] = createSignal(true);
   const [verified, setVerified] = createSignal(true);
@@ -43,7 +43,7 @@ const App: Component = () => {
           <HomeworkTasks to={to} setTo={setTo} verified={verified} setVerified={setVerified} tasks={rawArray(tasks(), "tasks")} currentDate={currentDate()} refetch={refetch} />
         </Suspense>
       </div>
-      <Datebar dates={dates} setCurrentDate={setCurrentDate} />
+      <Datebar currentDate={currentDate()} setCurrentDate={setCurrentDate} />
     </>
   );
 };
