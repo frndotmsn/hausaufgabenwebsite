@@ -1,0 +1,1 @@
+export const rawArray = <T>(proxy: T, key: string): T => Object.hasOwn(proxy as unknown as object, key) ? JSON.parse(JSON.stringify(proxy))[key] : [];

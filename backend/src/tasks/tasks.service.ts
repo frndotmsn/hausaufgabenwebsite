@@ -10,8 +10,11 @@ export class TasksService {
         return await prisma.task.findFirst({ where: { id } });
     }
     
-    public async getTasks(): Promise<Task[]> {
-        return await prisma.task.findMany();
+    public async getTasks(date: Date, toOrFrom: boolean, verified: boolean): Promise<Task[]> {
+        console.log(date);
+        console.log(toOrFrom);
+        console.log(verified);
+        return await prisma.task.findMany({ where: { ...(toOrFrom ? { dueTo: date} : { issuedAt: date }), verified } });
     }
 
     // TODO: check if creator isn't banned

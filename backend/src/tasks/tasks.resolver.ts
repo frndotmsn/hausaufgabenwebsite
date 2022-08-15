@@ -14,8 +14,8 @@ export class TasksResolver {
     }
 
     @Query(() => [Task], { nullable: 'items', name: 'tasks' })
-    async getTasks(): Promise<Task[]> {
-        return await this.tasksService.getTasks();
+    async getTasks(@Args('date') date: Date, @Args('toOrFrom') toOrFrom: boolean, @Args('verified') verified: boolean): Promise<Task[]> {
+        return await this.tasksService.getTasks(date, toOrFrom, verified);
     }
 
     @Mutation(() => Task)

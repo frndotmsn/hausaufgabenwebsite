@@ -23,7 +23,6 @@ const HeaderComponent: Component<HeaderComponentProps> = (props) => {
             if (date.toDateString() !== props.currentDate.toDateString())
                 dates.push(date);
         }
-        console.log(dates);
         return dates;
     });
 

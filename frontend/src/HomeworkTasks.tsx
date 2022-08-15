@@ -1,4 +1,4 @@
-import { Component, createMemo, createSignal, For } from "solid-js"
+import { Accessor, Component, createMemo, createSignal, For, Setter } from "solid-js"
 import { groupBy } from "./helpers/arrays";
 import { toNoun } from "./helpers/strings";
 import HomeworkSubject from "./HomeworkSubject";
@@ -9,35 +9,30 @@ import ConditionalTextButton from "./ConditionalTextButton";
 interface HomeworkTasksProps {
     tasks: Task[];
     currentDate: Date;
+    to: Accessor<boolean>;
+    setTo: Setter<boolean>;
+    verified: Accessor<boolean>;
+    setVerified: Setter<boolean>;
+    refetch: () => void;
 }
 
 const HomeworkTasks: Component<HomeworkTasksProps> = (props) => {
-    const [to, setTo] = createSignal(true);
-    const [verified, setVerified] = createSignal(true);
+    const toggleTo = () => { props.setTo(c => !c); props.refetch(); }
+    const toggleVerified = () => { props.setVerified(c => !c); props.refetch();}
 
-    const toggleTo = () => setTo(c => !c);
-    const toggleVerified = () => setVerified(c => !c);
-
-    const todaysTasks = createMemo(() => props.tasks.filter((task) =>
-        sameDate((to() ? task.dueTo : task.issuedAt), props.currentDate) &&
-        (!verified() || task.verified)
-    ));
-    console.log(props.tasks)
-    console.log(todaysTasks());
-
-    const taskGroups = createMemo(() => groupBy(todaysTasks(), (task: Task) => toNoun(task.subject)))
+    const taskGroups = createMemo(() => groupBy(props.tasks, (task: Task) => toNoun(task.subject)))
 
     return (
         <main>
             <div class="flex justify-between py-2 px-2 md:px-3 lg:px-10">
                 <ConditionalTextButton
                     onclick={toggleTo}
-                    condition={to()}
+                    condition={props.to()}
                     a={'Bis'}
                     b={'Von'} />
                 <ConditionalTextButton
                     onclick={toggleVerified}
-                    condition={verified()}
+                    condition={props.verified()}
                     a={'Nur Verifiziert'}
                     b={'Alle'} />
             </div>
