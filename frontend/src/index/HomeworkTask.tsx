@@ -1,5 +1,5 @@
 import { Component, createMemo, Show } from "solid-js";
-import { Task } from "./models/Task";
+import { Task } from "../models/Task";
 import UserComponent from "./UserComponent";
 
 interface HomeworkTaskProps {

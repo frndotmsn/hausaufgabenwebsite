@@ -1,9 +1,9 @@
 import { Accessor, Component, createMemo, createSignal, For, Setter } from "solid-js"
-import { groupBy } from "./helpers/arrays";
-import { toNoun } from "./helpers/strings";
+import { groupBy } from "../helpers/arrays";
+import { toNoun } from "../helpers/strings";
 import HomeworkSubject from "./HomeworkSubject";
-import { Task } from "./models/Task";
-import { sameDate } from './helpers/dates'
+import { Task } from "../models/Task";
+import { sameDate } from '../helpers/dates'
 import ConditionalTextButton from "./ConditionalTextButton";
 
 interface HomeworkTasksProps {

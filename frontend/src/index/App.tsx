@@ -3,12 +3,12 @@ import { createStore } from 'solid-js/store';
 import Datebar from './Datebar';
 import HeaderComponent from './HeaderComponent';
 import HomeworkTasks from './HomeworkTasks';
-import { Task } from './models/Task';
+import { Task } from '../models/Task';
 import { gql, createQuery, useApollo } from '@merged/solid-apollo'
 import { OperationVariables, TypedDocumentNode, WatchQueryOptions } from '@apollo/client';
 import { BaseOptions } from 'solid-js/types/reactive/signal';
-import { OwnQuery } from './helpers/OwnQuery';
-import { rawArray } from './helpers/proxies';
+import { OwnQuery } from '../helpers/OwnQuery';
+import { rawArray } from '../helpers/proxies';
 
 
 const TaskQuery = gql`

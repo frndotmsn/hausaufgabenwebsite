@@ -1,5 +1,5 @@
 import { Component } from "solid-js";
-import { User } from "./models/user";
+import { User } from "../models/user";
 
 type UserComponentProps = { name?: string, id: number }
 

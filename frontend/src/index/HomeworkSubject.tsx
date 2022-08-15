@@ -1,6 +1,6 @@
 import { Component, For } from "solid-js";
 import HomeworkTask from "./HomeworkTask";
-import { Task } from "./models/Task";
+import { Task } from "../models/Task";
 
 interface HomeworkSubjectProps {
     subject: string,
