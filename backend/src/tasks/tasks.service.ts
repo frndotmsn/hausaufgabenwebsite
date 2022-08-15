@@ -11,9 +11,6 @@ export class TasksService {
     }
     
     public async getTasks(date: Date, toOrFrom: boolean, verified: boolean): Promise<Task[]> {
-        console.log(date);
-        console.log(toOrFrom);
-        console.log(verified);
         return await prisma.task.findMany({ where: { ...(toOrFrom ? { dueTo: date} : { issuedAt: date }), verified } });
     }
 

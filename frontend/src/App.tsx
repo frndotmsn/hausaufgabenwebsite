@@ -10,6 +10,7 @@ import { BaseOptions } from 'solid-js/types/reactive/signal';
 import { OwnQuery } from './helpers/OwnQuery';
 import { rawArray } from './helpers/proxies';
 
+
 const TaskQuery = gql`
 query TaskQuery($date: DateTime!, $toOrFrom: Boolean!, $verified: Boolean!) {
   tasks(date: $date, toOrFrom: $toOrFrom, verified: $verified) {
@@ -37,8 +38,6 @@ const App: Component = () => {
   //])
 
   const [tasks, { mutate, refetch }] = OwnQuery<Task[]>(TaskQuery, [], { variables: { date: currentDate, toOrFrom: to, verified: verified } });
-
-  onMount(createMemo(() => console.log(rawArray(tasks(), "tasks"))));
 
   return (
     <>
