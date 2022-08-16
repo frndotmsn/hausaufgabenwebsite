@@ -1,5 +1,4 @@
 import { Module } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
 import { UsersModule } from "src/users/users.module";
 import { AccessJwtModule } from "./access-jwt.module";
 import { RefreshJwtModule } from "./refresh-jwt.module";
@@ -8,7 +7,6 @@ import { RefreshStrategy } from "./refresh.strategy";
 
 @Module({
     imports: [
-        ConfigModule,
         RefreshJwtModule,
         UsersModule,
         AccessJwtModule
