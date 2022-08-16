@@ -33,7 +33,7 @@ const App: Component = () => {
   return (
     <>
       <div class="grid">
-        <HeaderComponent currentDate={currentDate()} setCurrentDate={setCurrentDate}/>
+        <HeaderComponent currentDate={currentDate()} setCurrentDate={setCurrentDate} refetch={refetch}/>
         <Suspense fallback={<h1>Tasks are currently loading...</h1>}>
           <HomeworkTasks to={to} setTo={setTo} verified={verified} setVerified={setVerified} tasks={rawArray(tasks(), "tasks")} currentDate={currentDate()} refetch={refetch} />
         </Suspense>
