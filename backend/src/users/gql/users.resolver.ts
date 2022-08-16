@@ -1,5 +1,4 @@
 import { Resolver, Query, Args, Mutation, Int } from '@nestjs/graphql';
-import { UserCreateInput } from './dto/input/user-create.input';
 import { UserUpdateInput } from './dto/input/user-update.input';
 import { User } from '../../models/user'
 import { UsersService } from '../users.service';
@@ -16,11 +15,6 @@ export class UsersGQLResolver {
     @Query(() => [User], { nullable: 'items', name: 'users' })
     async getUsers(): Promise<User[]> {
         return await this.usersService.getUsers();
-    }
-
-    @Mutation(() => User)
-    async createUser(@Args('userCreateData') userCreateData: UserCreateInput): Promise<User> {
-        return await this.usersService.createUser(userCreateData);
     }
 
     @Mutation(() => User)

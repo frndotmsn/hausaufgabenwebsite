@@ -21,11 +21,7 @@ export class UsersService {
 
     public async createUser(userCreateData: UserCreateInput): Promise<User> {
         const hashedPassword = await bcrypt.hash(userCreateData.password, 10);
-        delete userCreateData.password;
-        const user = {
-            ...userCreateData,
-            hashedPassword
-        }
+        const user = { hashedPassword: hashedPassword, name: userCreateData.name, email: userCreateData.email };
         return await prisma.user.create({ data: user});
     }
     // TODO: Add authentication with check for admin bc of banning
