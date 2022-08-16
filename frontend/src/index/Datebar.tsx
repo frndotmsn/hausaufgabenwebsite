@@ -32,7 +32,7 @@ const Datebar: Component<DatebarProps> = (props) => {
         <>
             <div class="fixed grid justify-items-center bottom bottom-0 w-screen h-min z-20">
                 <button type="button" onclick={toggleOnVisible} id="toggle-button" class={`py-3${visible() ? ' toggled' : ''}`}>
-                    <img src="/src/svg/arrow.svg" alt="Toggle"/>    
+                    <img src="/images/svg/arrow.svg" alt="Toggle"/>    
                 </button>
             </div>
             <Suspense fallback={<h1>Dates are currently loading...</h1>}>
