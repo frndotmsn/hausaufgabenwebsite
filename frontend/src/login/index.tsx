@@ -1,6 +1,4 @@
-import { ApolloProvider } from "@merged/solid-apollo";
-import { render, Suspense } from "solid-js/web";
-import { client } from "../client";
+import { render } from "solid-js/web";
 import UsernamePassword from "./UsernamePassword";
 
 render(() => (
