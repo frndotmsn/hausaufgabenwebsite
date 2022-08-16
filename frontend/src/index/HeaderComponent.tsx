@@ -7,6 +7,7 @@ const options: Intl.DateTimeFormatOptions = { weekday: 'short', year: 'numeric',
 interface HeaderComponentProps {
     currentDate: Date;
     setCurrentDate: Setter<Date>;
+    refetch: () => void;
 }
 
 const HeaderComponent: Component<HeaderComponentProps> = (props) => {
@@ -37,7 +38,7 @@ const HeaderComponent: Component<HeaderComponentProps> = (props) => {
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 justify-items-center">
                     <For each={weekdays()}>{ (date: Date) =>
                         <div class="w-min">
-                            <DateComponent options={options} date={date} setCurrentDate={props.setCurrentDate} toggleOnVisible={toggleWeekdaySelectionVisible}/>
+                            <DateComponent options={options} date={date} setCurrentDate={props.setCurrentDate} toggleOnVisible={toggleWeekdaySelectionVisible} refetch={props.refetch}/>
                         </div>
                     }</For>
                 </div>
