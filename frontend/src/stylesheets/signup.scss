@@ -1,0 +1,8 @@
+@use 'shared/login';
+
+#root {
+    grid-template-rows: repeat(3, 1fr) auto repeat(3, 1fr);
+    &::before {
+        grid-row: 1 / 2;
+    }
+}
