@@ -1,16 +1,11 @@
-import { Component, createEffect, createMemo, createResource, createSignal, Resource, Suspense, onMount } from 'solid-js';
-import { createStore } from 'solid-js/store';
+import { Component, createSignal, Setter, Suspense } from 'solid-js';
 import Datebar from './Datebar';
 import HeaderComponent from './HeaderComponent';
 import HomeworkTasks from './HomeworkTasks';
 import { Task } from '../models/Task';
 import { gql } from '@merged/solid-apollo'
-import { OperationVariables, QueryOptions, TypedDocumentNode, WatchQueryOptions } from '@apollo/client';
-import { BaseOptions } from 'solid-js/types/reactive/signal';
 import { OwnQuery } from '../helpers/OwnQuery';
 import { rawArray } from '../helpers/proxies';
-import { client } from '.';
-
 
 const TaskQuery = gql`
 query TaskQuery($date: DateTime!, $toOrFrom: Boolean!, $verified: Boolean!) {
@@ -32,7 +27,7 @@ const App: Component = () => {
   const [currentDate, setCurrentDate] = createSignal(new Date(2032, 1, 5));
   const [to, setTo] = createSignal(true);
   const [verified, setVerified] = createSignal(true);
-
+  
   const [tasks, { mutate, refetch }] = OwnQuery<Task[]>(TaskQuery, [], { variables: { date: currentDate, toOrFrom: to, verified: verified } });
 
   return (
@@ -43,7 +38,7 @@ const App: Component = () => {
           <HomeworkTasks to={to} setTo={setTo} verified={verified} setVerified={setVerified} tasks={rawArray(tasks(), "tasks")} currentDate={currentDate()} refetch={refetch} />
         </Suspense>
       </div>
-      <Datebar currentDate={currentDate()} setCurrentDate={setCurrentDate} />
+      <Datebar currentDate={currentDate()} setCurrentDate={setCurrentDate} refetch={refetch} />
     </>
   );
 };

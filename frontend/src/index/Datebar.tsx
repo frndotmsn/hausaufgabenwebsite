@@ -1,13 +1,14 @@
 import { OperationVariables, QueryOptions } from '@apollo/client';
 import { gql } from '@merged/solid-apollo'
-import { Accessor, Component, createMemo, createResource, createSignal, For, Setter, Suspense } from "solid-js";
-import { client } from ".";
+import { Accessor, Component, createMemo, createResource, createSignal, For, Setter, Suspense, VoidComponent } from "solid-js";
+import { client } from '../client';
 import { rawArray } from '../helpers/proxies';
 import DateComponent from "./DateComponent";
 
 interface DatebarProps {
     currentDate: Date,
-    setCurrentDate: Setter<Date>
+    setCurrentDate: Setter<Date>,
+    refetch: () => void;
 }
 
 const DateQuery = gql`
@@ -37,7 +38,7 @@ const Datebar: Component<DatebarProps> = (props) => {
             <Suspense fallback={<h1>Dates are currently loading...</h1>}>
                 <ul class={`fixed bg-white ${visible() ? 'top-0' : 'top-full'} min-h-screen w-screen z-10 p-2 md:p-3 lg:p-4`}>
                     <For each={rawArray(dates(), "dates").filter(v => (v as unknown as string) !== props.currentDate.toISOString()).map<Date>(x => new Date(x))}>{(date: Date) => 
-                        <li><DateComponent date={date} setCurrentDate={props.setCurrentDate} toggleOnVisible={toggleOnVisible} /></li>
+                        <li><DateComponent date={date} setCurrentDate={props.setCurrentDate} toggleOnVisible={toggleOnVisible} refetch={props.refetch} /></li>
                     }</For>
                 </ul>
             </Suspense>

@@ -1,6 +1,6 @@
 import { OperationVariables, QueryOptions, TypedDocumentNode } from "@apollo/client";
 import { Accessor, createMemo, createResource } from "solid-js";
-import { client } from "..";
+import { client } from "../client";
   
 type CreateQueryOptions<TData, TVariables> = Omit<QueryOptions<TVariables, TData>, 'query'>
 

@@ -2,10 +2,11 @@ import { Component, Setter } from "solid-js";
 import { localeDateStringOptions } from "./constants";
 
 interface DateComponentProps {
-    setCurrentDate: Setter<Date>;
+    setCurrentDate: (date: Date) => void;
     toggleOnVisible: () => void;
     date: Date;
     options?: Intl.DateTimeFormatOptions;
+    refetch: () => void;
 }
 
 const DateComponent: Component<DateComponentProps> = (props) => {
@@ -13,6 +14,7 @@ const DateComponent: Component<DateComponentProps> = (props) => {
         const dateString = currentTarget.getAttribute('data-date');
         props.setCurrentDate(new Date(dateString));
         props.toggleOnVisible();
+        props.refetch();
     };
     
     return (

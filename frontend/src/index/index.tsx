@@ -1,15 +1,9 @@
 /* @refresh reload */
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@merged/solid-apollo';
+import { ApolloProvider } from '@merged/solid-apollo';
 import { render, Suspense } from 'solid-js/web';
+import { client } from '../client';
 
 import App from './App';
-
-export const client = new ApolloClient(
-    {
-        uri: 'http://localhost:3000/graphql',
-        cache: new InMemoryCache(),
-    }
-);
 
 render(() => (
 <ApolloProvider client={client}>

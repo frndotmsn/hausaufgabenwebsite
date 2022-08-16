@@ -1,0 +1,18 @@
+@use 'mixins' as *;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$text-gray-400: rgb(55 65 81);
+
+span {
+    @include text();
+}
+
+button {
+    @include text();
+    @include opacityOnHover();
+    @include transition();
+    transition-property: opacity;
+    cursor: pointer;
+}

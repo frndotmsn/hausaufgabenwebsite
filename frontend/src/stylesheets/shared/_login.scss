@@ -1,0 +1,63 @@
+@use 'mixins' as *;
+@use 'text';
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: grid;
+    place-items: center;
+}
+
+label {
+    @include text();
+}
+
+#root {
+    display: grid;
+    gap: 20px;
+    &::before {
+        content: '';
+    }
+}
+
+.username-password {
+    display: grid;
+    height: min-content;
+    grid-template-rows: repeat(2, 1fr);
+    margin: 0 auto;
+    gap: 20px;
+    width: min-content;
+
+    div {
+        display: grid;
+        place-items: center;
+        position: relative;
+    }
+}
+
+input[type=text], button {
+    border-radius: 5px;
+    border: solid 2px black;
+}
+
+input[type=text] {
+    @include text();
+
+    display: block;
+    text-align: left;
+    outline: none;
+    background: none;
+    padding: 14px 10px;
+    min-width: 200px;
+
+    &+label {
+        transition: transform 0.25s;
+        position: absolute;
+    }
+
+    &:is(:focus, :not(:placeholder-shown)) + label {
+        transform: scale(75%) translateY(-70%);
+    }
+}

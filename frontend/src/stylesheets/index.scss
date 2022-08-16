@@ -1,0 +1,25 @@
+@use 'shared/mixins' as *;
+@use 'shared/text';
+
+#root > div:first-child {
+    row-gap: 2px;
+    background-color: black;
+    * {
+        background-color: white;
+    }
+}
+
+#toggle-button {
+    transition-property: transform, opacity;
+    img {
+        height: 3.125vh;
+    }
+    &.toggled {
+        transform: rotate(180deg);    
+    }
+}
+
+#root > ul {
+    @include transition();
+    transition-property: top;
+}

@@ -1,0 +1,18 @@
+@mixin transition {
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-out;
+}
+
+@mixin opacityOnHover {
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+@mixin text {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 4vh;
+    @media (min-width: 1024px) {
+        font-size: 3vh;
+    }
+}

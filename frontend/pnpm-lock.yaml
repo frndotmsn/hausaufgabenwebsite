@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@apollo/client': ^3.6.9
   '@merged/solid-apollo': ^1.7.1
+  '@types/node': ^18.7.4
   autoprefixer: ^10.4.7
   graphql: ^16.5.0
   postcss: ^8.4.14
@@ -26,6 +27,7 @@ dependencies:
   tailwindcss-nth-child: 0.0.6
 
 devDependencies:
+  '@types/node': 18.7.4
   typescript: 4.6.4
   vite: 2.9.9_sass@1.53.0
   vite-plugin-solid: 2.2.6_sass@1.53.0
@@ -440,6 +442,10 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
     dev: false
+
+  /@types/node/18.7.4:
+    resolution: {integrity: sha512-RzRcw8c0B8LzryWOR4Wj7YOTFXvdYKwvrb6xQQyuDfnlTxwYXGCV5RZ/TEbq5L5kn+w3rliHAUyRcG1RtbmTFg==}
+    dev: true
 
   /@wry/context/0.6.1:
     resolution: {integrity: sha512-LOmVnY1iTU2D8tv4Xf6MVMZZ+juIJ87Kt/plMijjN20NMAXGmH4u8bS1t0uT74cZ5gwpocYueV58YwyI8y+GKw==}
