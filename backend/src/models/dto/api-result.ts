@@ -3,3 +3,5 @@ interface APIResult<T> {
     data?: T;
     message?: string;
 }
+
+export { APIResult };
