@@ -1,5 +1,4 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Request } from 'express';
@@ -7,7 +6,7 @@ import { Strategy } from 'passport-custom'
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt'
 import { User } from 'src/models/user';
-import { ACCESS_JWT_COOKIE } from 'src/env';
+import { ACCESS_JWT_COOKIE } from '../constants';
 
 
 @Injectable()
@@ -15,12 +14,11 @@ export class RefreshStrategy extends PassportStrategy(Strategy, 'refresh-jwt') {
     static key = 'refresh-jwt'
     constructor(
         private usersService: UsersService,
-        private readonly configService: ConfigService,
         @Inject('AccessJwtService') private accessJwtService: JwtService,
         @Inject('RefreshJwtService') private readonly refreshJwtService: JwtService) { super() }
 
     async validate(request: Request): Promise<User | null> {
-        const accessToken = request?.cookies[this.configService.getOrThrow<string>(ACCESS_JWT_COOKIE)];
+        const accessToken = request?.cookies[ACCESS_JWT_COOKIE];
         if (!accessToken) throw new UnauthorizedException('credentials_incomplete', 'Missing access token')
         if (!request.headers?.authorization) throw new UnauthorizedException('credentials_bad_scheme', 'Format is Authorization: Bearer [token]')
         const parts = request.headers.authorization.split(' ');
