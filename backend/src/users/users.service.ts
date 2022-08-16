@@ -25,13 +25,14 @@ export class UsersService {
         return await prisma.user.create({ data: user});
     }
     // TODO: Add authentication with check for admin bc of banning
-    public async updateUser(id: string, userUpdateData: UserUpdateInput): Promise<User> {
+    public async updateUser(user: User, id: string, userUpdateData: UserUpdateInput): Promise<APIResult<User>> {
+        if (user.id !== id) {
+            return { success: false, message: 'You do not have permission to update this user' };
+        }
+
         const hashedPassword: string | undefined = userUpdateData.password ? await bcrypt.hash(userUpdateData.password, 10) : undefined
-        delete userUpdateData.password;
-        return await prisma.user.update({
-            where: { id },
-            data: { ...userUpdateData, hashedPassword }
-        });
+        const userData = { hashedPassword: hashedPassword, name: userUpdateData.name, email: userUpdateData.email };
+        return { success: true, data: await prisma.user.update({ where: { id }, data: userData }) };
     }
 
     public async deleteUser(id: string): Promise<User> {
