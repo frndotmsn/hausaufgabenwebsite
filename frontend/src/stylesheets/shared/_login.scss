@@ -29,12 +29,12 @@ label {
     margin: 0 auto;
     gap: 20px;
     width: min-content;
+}
 
-    div {
-        display: grid;
-        place-items: center;
-        position: relative;
-    }
+div:not(.username-password) {
+    display: grid;
+    place-items: center;
+    position: relative;
 }
 
 input[type=text], button {
